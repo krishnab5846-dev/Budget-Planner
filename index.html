@@ -41,11 +41,13 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}td input{width:78px
 .mark{position:absolute;top:-4px;width:2px;height:20px;background:var(--tx);opacity:.7;transition:left .3s}
 .ok{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}
 .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}button{font:inherit;border:0;border-radius:8px;padding:8px 16px;background:#24407a;color:#fff;cursor:pointer;font-weight:600}button.ghost{background:transparent;color:var(--mut);border:1px solid var(--ln)}
+.dlb{background:#24407a;color:#fff;text-decoration:none;border-radius:8px;padding:8px 16px;font-weight:600;font-size:.85rem}
 @media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}.hero p{max-width:100%}.hero svg{opacity:.25;width:60%}}
 </style></head><body>
 <div class="hero">
 <h1>Allowance Budget Planner</h1><p>Enter your numbers, watch your money turn into percentages, and see where it is really going.</p>
 <svg viewBox="0 0 220 140" preserveAspectRatio="xMaxYMax meet" aria-hidden="true"><g fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"><circle cx="170" cy="60" r="44"/><circle cx="170" cy="60" r="28"/></g><g fill="#fff"><rect x="30" y="92" width="20" height="40" rx="4" opacity=".35"/><rect x="62" y="72" width="20" height="60" rx="4" opacity=".5"/><rect x="94" y="48" width="20" height="84" rx="4" opacity=".7"/><rect x="126" y="24" width="20" height="108" rx="4" opacity=".9"/></g><circle cx="190" cy="104" r="20" fill="#fbbf24"/><text x="190" y="111" font-size="20" font-weight="700" text-anchor="middle" fill="#7a4b00">%</text></svg></div>
+<div class="card" id="dl" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><span class="k" style="margin-right:4px">Get your own copy</span><a class="dlb" href="index.html" download="budget-planner-dashboard.html">Download dashboard</a></div>
 <div class="card"><label class="k" for="inc">Total monthly money (allowance + income)</label><input id="inc" type="number" min="0" placeholder="Enter your monthly total" style="margin-top:6px"><div class="acts"><button id="bSave">Save</button><button id="bCsv">Export CSV</button><button id="bClr" class="ghost">Clear</button><span class="g" id="msg"></span></div></div>
 <div class="kpis">
 <div class="kpi" style="--c:#2f6fed"><div class="k">Spent</div><div class="v" id="kS">0%</div></div>
@@ -92,4 +94,5 @@ try{const d=window.claude&&await claude.use('downloads');if(d){await d.save({fil
 try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/csv'}));a.download=name;a.click()}catch(e){note('Export not available here')}}
 document.getElementById('bSave').onclick=save;document.getElementById('bCsv').onclick=csv;document.getElementById('bClr').onclick=clr;
 document.querySelectorAll('input').forEach(x=>x.addEventListener('input',up));load();up();
+if(location.protocol.indexOf('http')!==0){document.getElementById('dl').style.display='none'}
 </script></body></html>
